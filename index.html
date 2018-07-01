@@ -16,13 +16,18 @@
             <a class="brand-logo center" >CheapTags</a>
         </div>
     </nav>
-    <div class="container" id="btnContainer">
-        <div class="row">
+    <div class="row">
+        <div class="col s4" id="prevVisistedDiv">
+            <h5 style="text-align: center;">Previously Visited</h5>
+            <ul class="collection" id="prevVisitedUl">
+            </ul>
+        </div>
+        <div class="col s8" id="btnContainer">
             <div class="col s12 btnDiv" >
                 <a id="selectFolderBtn" class="file_upload btn"><i class="material-icons left">file_upload</i>Choose Folder</a>
             </div>
             <div class="col s12 btnDiv" >
-                <a id="selectFolderBtn" class="camera_enhance btn"><i class="material-icons left">camera_enhance</i>Instagram Import</a>
+                <a id="selectFolderBtn" class="camera_enhance btn"><i class="material-icons left">camera_enhance</i>Instagram Imp.</a>
             </div>    
             <div class="col s12 btnDiv" >
                 <a id="selectFolderBtn" class="tag_faces btn"><i class="material-icons left">tag_faces</i>My Tags</a>
@@ -30,5 +35,21 @@
         </div>
     </div>
     <script src="home.js"></script> 
+    <script>
+        const ul = document.getElementById("prevVisitedUl"); 
+        ipcRenderer.on("data:prevVisited", function(e, prevVisited){
+            for (let folder of prevVisited){
+                let li = document.createElement("li");
+                li.className = "collection-item"; 
+                li.innerHTML = "<a href='javascript:void(0);'>" + folder + "</a>";
+                li.addEventListener("click", function(){
+                    folderChosen(folder); 
+                });
+                ul.appendChild(li); 
+            }
+        });
+
+
+    </script>
 </body>
 </html>

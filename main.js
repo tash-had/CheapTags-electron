@@ -12,6 +12,8 @@ const {
     ipcMain
 } = electron;
 
+
+
 // Window vars 
 let mainWindow, browseImagesWindow; 
 
@@ -23,6 +25,16 @@ app.on("ready", function() {
         app.quit(); 
     });
 });
+
+// app.on("web-contents-created", function(){
+//     console.log("HI111"); 
+    
+//     if (prevVisited){
+        
+//         mainWindow.webContents.send("data:prevVisited", prevVisited); 
+//     }
+// });
+
 
 ipcMain.on("event:folderChosen", function(e, dir){
     let dirStr = String(dir); 
@@ -56,10 +68,12 @@ function loadURL(baseWindow, fileName){
  function createBrowseImagesWindow(folder) {
      // create window 
      browseImagesWindow = createNewWindow({
-        title: folder
+        title: folder,
+        height: 720, 
+        width: 1080
      }); 
      loadURL(browseImagesWindow, "browse.html"); 
      browseImagesWindow.webContents.on("did-finish-load", function(){
-        browseImagesWindow.webContents.send("data:picPaths", folder); 
+        browseImagesWindow.webContents.send("data:folderChosen", folder); 
      });
  } 

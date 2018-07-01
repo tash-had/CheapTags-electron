@@ -11,7 +11,7 @@ M.AutoInit();
 
 // currentWindow.toggleDevTools(); 
 
-ipcRenderer.on("data:picPaths", function(e, folder){
+ipcRenderer.on("data:folderChosen", function(e, folder){
     async.concat([folder], fs.readdir, function(err, files){
         filterPictures(folder, files, renderPictures); 
     });
@@ -72,5 +72,5 @@ function sendNoPicsFoundErr(){
 function setSelectedImage(path){
     let selectedImg = document.getElementById("selectedImg"); 
     selectedImg.src = path;
-    selectedImg.style = "width:200%; height:200%;"; 
+    selectedImg.style = "width:200%;height:200%;"; 
 }
