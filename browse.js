@@ -55,7 +55,7 @@ function renderPictures(picPathArr){
         const img = document.createElement("img"); 
         img.className = "folderImage hover-shadow cursor"; 
         img.src = picPath; 
-        img.style = "width:60%"; 
+        img.style = "width:70%"; 
         img.addEventListener("click", function(){
             setSelectedImage(picPath); 
         });
@@ -72,4 +72,5 @@ function sendNoPicsFoundErr(){
 function setSelectedImage(path){
     let selectedImg = document.getElementById("selectedImg"); 
     selectedImg.src = path;
+    selectedImg.style = "width:200%; height:200%;"; 
 }

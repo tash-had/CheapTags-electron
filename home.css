@@ -1,5 +1,7 @@
 #btnContainer{
     text-align: center;
+    margin-top: 20%;    
+
 }
 
 .btnDiv{
@@ -9,5 +11,4 @@
 .btn{
     background-color: #2196fe !important;
     width: 200px !important;
-
 }

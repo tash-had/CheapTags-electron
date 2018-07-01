@@ -39,6 +39,15 @@ img.hover-shadow {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-#selectedImageDiv {
-    text-align: center;
+#selectedImageDiv{
+    position: fixed;
+    text-align: center !important;
+    vertical-align: middle;
+    margin-left: 35%; 
+    margin-top: 5%; 
+    /* width: 70%;  */
+}
+
+#folderContentsColDiv{
+    margin-top: 2%; 
 }
