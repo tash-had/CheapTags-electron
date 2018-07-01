@@ -4,8 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
+    <link rel="stylesheet" href="browse.css">
 </head>
 <body>
+    <nav>
+        <div class="nav-wrapper" style="background-color: #2196fe">
+            <a class="brand-logo center" >CheapTags</a>
+        </div>
+    </nav>
+    <div id="contentDiv" class="row">
+        <div id="folderContentsColDiv" class="column">
+        </div>
+        <div id="selectedImageDiv" class="column">
+                <img id="selectedImg" width="100%" src="" alt="">
+        </div>
+    </div>
+
+    <!-- Modal Structure -->
+  <div id="noPicturesAlert" class="modal">
+    <div class="modal-content">
+        <h6>No Pictures</h6>
+      <p>No pictures found in the directory you selected.</p>
+    </div>
+  </div>
+          
+    <!-- Insert this line above script imports 
+    <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+
+    <!-- Insert this line after script imports -->
+    <!-- <script>if (window.module) module = window.module;</script> -->
     <script src="browse.js"></script>
 </body>
 </html>

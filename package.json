@@ -16,6 +16,7 @@
     "electron": "^2.0.3"
   },
   "dependencies": {
+    "alertify.js": "^1.0.12",
     "async": "^2.6.1"
   }
 }

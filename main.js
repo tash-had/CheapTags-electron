@@ -29,6 +29,9 @@ ipcMain.on("event:folderChosen", function(e, dir){
     createBrowseImagesWindow(dirStr); 
 });
 
+ipcMain.on("err:noPicsFound", function(e){
+    browseImagesWindow.close(); 
+});
 
 function loadURL(baseWindow, fileName){
     baseWindow.loadURL(url.format({

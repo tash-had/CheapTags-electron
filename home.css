@@ -1,0 +1,13 @@
+#btnContainer{
+    text-align: center;
+}
+
+.btnDiv{
+    margin-top: 2%; 
+}
+
+.btn{
+    background-color: #2196fe !important;
+    width: 200px !important;
+
+}
