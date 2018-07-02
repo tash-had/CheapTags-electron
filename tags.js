@@ -6,7 +6,7 @@ const store = new Store();
 function addListItem(item){
     const itemText = document.createTextNode(item); 
     const li = document.createElement("li"); 
-    li.className = "collection-item"; 
+    li.className = "list-group-item"; 
     
     li.appendChild(itemText); 
     ul.appendChild(li);   

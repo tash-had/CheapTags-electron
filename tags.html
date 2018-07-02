@@ -1,29 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Tags</title>
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
-  <link rel="stylesheet" href="tags.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Tags</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+    <link rel="stylesheet" href="tags.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.2/awesomplete.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.2/awesomplete.min.js"></script>
+
+    <link rel="stylesheet" href="http://daemonite.github.io/material/css/material.min.css">
+    <script crossorigin="anonymous" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script crossorigin="anonymous" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="http://daemonite.github.io/material/js/material.min.js"></script>
 </head>
 <body>
-  <nav style="background-color: #2196fe;">
-    <div class="nav-wrapper">
-      <a class="brand-logo center">Tag List</a>
-    </div>
-  </nav>
-  <ul class="collection">
-  </ul>
-        <div>
+    <nav style="background-color: #2196fe;">
+        <div class="nav-wrapper">
+            <a class="brand-logo center">Tag List</a>
         </div>
-        <script src="tags.js"></script>
-        <footer>
-            <div class="container">
-                <input type="text" id="tagInput" placeholder="New Tag..." autofocus>
-            </div>
-        </footer>
+    </nav>
+    <ul class="list-group">
+    </ul>
+    <script src="tags.js"></script>
+    <footer>
+        <div class="container">
+            <input type="text" id="tagInput" placeholder="New Tag..." autofocus>
+        </div>
+    </footer>
 </body>
 </html>

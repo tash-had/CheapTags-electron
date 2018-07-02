@@ -72,5 +72,5 @@ function sendNoPicsFoundErr(){
 function setSelectedImage(path){
     let selectedImg = document.getElementById("selectedImg"); 
     selectedImg.src = path;
-    selectedImg.style = "width:200%;height:200%;"; 
+    selectedImg.style = "width:150%;height:150%;"; 
 }
