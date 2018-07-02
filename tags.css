@@ -1,3 +1,33 @@
-#addTagBtn{
-    background-color: #2196fe; 
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+/* body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+} */
+footer {
+    background-color: orange;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 100px;
+    width: 100%;
+    overflow: hidden;
+    background-color: #2196fe;
+    text-align: center;
+    padding-top: 2%; 
+}
+
+#tagInput{
+    color: white;
+    border-color: white;
+    font-size: 1.5em;
+    font-weight: lighter;
 }

@@ -41,7 +41,7 @@
             for (let folder of prevVisited){
                 let li = document.createElement("li");
                 li.className = "collection-item"; 
-                li.innerHTML = "<a href='javascript:void(0);'>" + folder + "</a>";
+                li.innerHTML = "<a onclick='javascript:void(0);'>" + folder + "</a>";
                 li.addEventListener("click", function(){
                     folderChosen(folder); 
                 });

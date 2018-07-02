@@ -4,21 +4,20 @@ const Store = require('electron-store');
 const store = new Store();
 
 function addListItem(item){
-    if (addNewTagToDB(item)){
-        const itemText = document.createTextNode(item); 
-        const li = document.createElement("li"); 
-        li.className = "collection-item"; 
-        
-        li.appendChild(itemText); 
-        ul.appendChild(li);   
-        if (ul.childElementCount == 0){
-            ul.className = "collection"; 
-        }
+    const itemText = document.createTextNode(item); 
+    const li = document.createElement("li"); 
+    li.className = "collection-item"; 
+    
+    li.appendChild(itemText); 
+    ul.appendChild(li);   
+    if (ul.childElementCount == 0){
+        ul.className = "collection"; 
     }
 }
 
 function addNewTagToDB(tag){
     let tags = store.get("tags"); 
+    tag = tag.toLowerCase(); 
     if (tags){
         if (tags.includes(tag)){
             return false; 
@@ -32,26 +31,63 @@ function addNewTagToDB(tag){
     return true; 
 }
 
-function processNewTag(e){
-    e.preventDefault(); 
-    const item = document.querySelector("#item").value;
-    if (item){
-        addListItem(item); 
+function removeTagFromDB(tag){
+    let tags = store.get("tags"); 
+    tag = tag.toLowerCase(); 
+    if (tags){
+        if (tags.includes(tag)){
+            tags.splice(tags.indexOf(tag), 1);
+        }else{
+            return false; 
+        }
+    }else{
+        tags = []; 
     }
+    store.set("tags", tags); 
+    return true; 
 }
 
 function removeItem(item){
-  if (item.target != ul){
-    item.target.remove(); 
-  }
-  if (ul.childElementCount == 0){
-    ul.className = ''; 
-  }
+    item = item.target; 
+    if (removeTagFromDB(item.innerHTML)){
+        if (item != ul){
+            item.remove(); 
+        }
+        if (ul.childElementCount == 0){
+            ul.className = ''; 
+        }
+    }
 }
 
 window.onload = function(){
-    const form = document.querySelector("form"); 
+    loadAllTags();
+    const newTagInput = document.getElementById("tagInput"); 
+    newTagInput.addEventListener("keypress", function(e){
+        if (e.keyCode == 13) {
+            const tag = newTagInput.value;
+            if (tag && addNewTagToDB(tag)){
+                addListItem(tag); 
+                newTagInput.value = ""; 
+            }
+        }
+    }); 
     ul.addEventListener("dblclick", removeItem);
-    form.addEventListener('submit', processNewTag);
 }
 
+function loadAllTags(){
+    let tags = store.get("tags"); 
+    if (tags){
+        for (let tag of tags){
+            addListItem(toTitleCase(tag)); 
+        }
+    }
+}
+
+function toTitleCase(str) {
+    return str.replace(
+        /\w\S*/g,
+        function(txt) {
+            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+        }
+    );
+}
