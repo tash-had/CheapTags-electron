@@ -12,7 +12,9 @@ const viewTagsBtn = document.getElementById("viewTagsBtn");
 const store = new Store();
 
 let prevVisited = store.get("prevVisited"); 
-
+if (!prevVisited){
+    prevVisited = []; 
+}
 
 browseBtn.addEventListener("click", chooseFolderAction);
 viewTagsBtn.addEventListener("click", function(){

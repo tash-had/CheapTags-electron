@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+    <link rel="stylesheet" href="css/materialize.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
     <link rel="stylesheet" href="browse.css">
+    <link rel="stylesheet" href="http://xoxco.com/examples/jquery.tagsinput.css">
 </head>
 <body>
     <div class="navbar-fixed">
@@ -32,19 +33,12 @@
       <p>No pictures found in the directory you selected.</p>
     </div>
   </div>
-  <footer>
-    <div class="container">
-        <input type="text" id="tagInput" placeholder="New Tag..." autofocus>
+  <footer id="tagsFooter">
+    <div id="tagsInput" class="container tags-input" data-name="tags-input">
+            <!-- <input type="text" id="tagsInput" placeholder="New Tag..." autofocus> -->
     </div>
-</footer>
-          
-    <!-- Insert this line above script imports 
-    <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
-
-    <!-- Insert this line after script imports -->
-    <!-- <script>if (window.module) module = window.module;</script> -->
+</footer>         
     <script src="browse.js"></script>
+    <script src="js/jquery.tagsinput.js"></script>
 </body>
 </html>

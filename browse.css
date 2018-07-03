@@ -60,12 +60,22 @@ footer {
     height: 100px;
     width: 100%;
     overflow: hidden;
-    background-color: #2196fe;
+    background-color: white;
+    border: none;
     text-align: center;
+    padding-left: 25%;
+    padding-right: 25%;
     padding-top: 2%; 
+
 }
 
-#tagInput{
+#tagsInput, #tagsInput_tag, #tagsInput_tagsinput{
     color: white;
     border-color: white !important;
+    font-weight: lighter !important;
+    border: none !important; 
+}
+
+:root {
+    font-family: Arial, Helvetica, sans-serif;
 }

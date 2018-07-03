@@ -4,11 +4,26 @@ const {app, ipcRenderer} = electron;
 
 const async = require("async");
 const fs = require("fs"); 
+const Store = require('electron-store');
+window.$ = window.jQuery = require("./js/jquery.min.js")
+let selectedImg = document.getElementById("selectedImg"); 
 
 const ACCEPTED_PICTURE_EXTENSIONS = [".jpg", ".png", ".jpeg", ".bmp", ".gif"]; 
-
+const store = new Store();
 M.AutoInit();
 
+window.onload = function(){
+    $("#tagsFooter").hide()
+    $('#tagsInput').tagsInput({
+        'height':'100%',
+        'width':'100%',
+        'defaultText':'...',
+        'placeholderColor' : '#666666',
+        'onAddTag':storeNewTag,
+        'onRemoveTag':removeTagFromStore,
+    });
+}
+// store.clear();
 // currentWindow.toggleDevTools(); 
 
 ipcRenderer.on("data:folderChosen", function(e, folder){
@@ -34,22 +49,13 @@ function filterPictures(dirStr, files, callback){
 
 function renderPictures(picPathArr){
     if (picPathArr.length == 0){
-        //     alertify.confirm("The directory you selected doesn't contain any pictures.").then(function(){
-        //         ipcRenderer.send("err:noPicsFound"); 
-        //     }); 
         let elem = document.getElementById("noPicturesAlert");
         var instance = M.Modal.getInstance(elem);
         instance.options = {
             onCloseStart: sendNoPicsFoundErr,
             dismissible: true
         }
-
-        // M.Modal.init(elem, options); 
-
         instance.open(); 
-
-        // var elems = document.querySelectorAll('.modal');
-        // var instances = M.Modal.init(elems, options);
     }
     for (let picPath of picPathArr){
         const img = document.createElement("img"); 
@@ -66,90 +72,52 @@ function renderPictures(picPathArr){
 }
 
 function sendNoPicsFoundErr(){
-    console.log("HI"); 
     ipcRenderer.send("err:noPicsFound"); 
 }
 function setSelectedImage(path){
-    let selectedImg = document.getElementById("selectedImg"); 
     selectedImg.src = path;
-    selectedImg.style = "width:150%;height:150%;"; 
+    selectedImg.style = "width:150%;height:150%;";
+    $("#tagsFooter").show();  
+    loadTags(); 
 }
 
-/** TURNING TAGS TO TAG BOXES */
+function getSelectedPicturePath(){
+    return selectedImg.src; 
+}
 
-[].forEach.call(document.getElementsByClassName('tags-input'), function (el) {
-    let hiddenInput = document.createElement('input'),
-    mainInput = document.createElement('input'),
-    tags = [];
-    
-    hiddenInput.setAttribute('type', 'hidden');
-    hiddenInput.setAttribute('name', el.getAttribute('data-name'));
-    
-    mainInput.setAttribute('type', 'text');
-    mainInput.classList.add('main-input');
-    mainInput.addEventListener('input', function () {
-        let enteredTags = mainInput.value.split(',');
-        if (enteredTags.length > 1) {
-            enteredTags.forEach(function (t) {
-                let filteredTag = filterTag(t);
-                if (filteredTag.length > 0)
-                addTag(filteredTag);
-            });
-            mainInput.value = '';
+function loadTags(){
+    $('#tagsInput').importTags('');
+    let tagList = store.get(getSelectedPicturePath()); 
+    if (tagList){
+        for (let tag of tagList){
+            $("#tagsInput").addTag(tag); 
         }
-    });
-    
-    mainInput.addEventListener('keydown', function (e) {
-        let keyCode = e.which || e.keyCode;
-        if (keyCode === 8 && mainInput.value.length === 0 && tags.length > 0) {
-            removeTag(tags.length - 1);
+    }
+}
+
+function storeNewTag(tag){
+    let tagList = store.get(getSelectedPicturePath()); 
+    let allTags = store.get("tags"); 
+
+    if (tagList && !tagList.includes(tag)){
+        tagList.push(tag);
+    }else if (!tagList){
+        tagList = [tag]; 
+    }
+    if (!allTags || !allTags.includes(tag.toLowerCase())){
+        if (!allTags){
+            allTags = []; 
         }
-    });
-    
-    el.appendChild(mainInput);
-    el.appendChild(hiddenInput);
-    
-    addTag('hello!');
-    
-    function addTag (text) {
-        let tag = {
-            text: text,
-            element: document.createElement('span'),
-        };
-        
-        tag.element.classList.add('tag');
-        tag.element.textContent = tag.text;
-        
-        let closeBtn = document.createElement('span');
-        closeBtn.classList.add('close');
-        closeBtn.addEventListener('click', function () {
-            removeTag(tags.indexOf(tag));
-        });
-        tag.element.appendChild(closeBtn);
-        
-        tags.push(tag);
-        
-        el.insertBefore(tag.element, mainInput);
-        
-        refreshTags();
+        allTags.push(tag.toLowerCase()); 
+        store.set("tags", allTags); 
     }
-    
-    function removeTag (index) {
-        let tag = tags[index];
-        tags.splice(index, 1);
-        el.removeChild(tag.element);
-        refreshTags();
+    store.set(getSelectedPicturePath(), tagList); 
+}
+
+function removeTagFromStore(tag){
+    let tagList = store.get(getSelectedPicturePath()); 
+    if (tagList && tagList.includes(tag)){
+        tagList.splice(tagList.indexOf(tag), 1); 
+        store.set(getSelectedPicturePath(), tagList); 
     }
-    
-    function refreshTags () {
-        let tagsList = [];
-        tags.forEach(function (t) {
-            tagsList.push(t.text);
-        });
-        hiddenInput.value = tagsList.join(',');
-    }
-    
-    function filterTag (tag) {
-        return tag.replace(/[^\w -]/g, '').trim().replace(/\W+/g, '-');
-    }
-});
+}
