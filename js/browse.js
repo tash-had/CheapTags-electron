@@ -136,7 +136,6 @@ function storeNewTag(tag){
     renameFile(getSelectedPicturePath()); 
 }
 
-// https://drive.google.com/drive/folders/1q83aP7rZwZaMkpmFUyNtMsYbsRE0nwFQ
 function removeTagFromStore(tag){
     let tagList = store.get(getSelectedPicturePath()); 
     if (tagList && tagList.includes(tag)){
