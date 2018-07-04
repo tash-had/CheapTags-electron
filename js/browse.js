@@ -167,6 +167,8 @@ function renameFile(path){
             store.delete(path); 
             store.set(newPath+"ORIG", origName); 
             store.set(newPath+"PATH", dir); 
+            store.delete(path+"ORIG"); 
+            store.delete(path+"PATH"); 
         });
     }
 }
