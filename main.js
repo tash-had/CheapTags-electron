@@ -20,6 +20,7 @@ let mainWindow, browseImagesWindow;
 
 // Events 
 
+
 /**
  * UPDATES 
  */
