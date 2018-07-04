@@ -24,12 +24,12 @@ window.onload = function(){
         'onRemoveTag':removeTagFromStore,
     });
 
-    // String.prototype.replaceAll = function(search, replacement) {
-    //     var target = this;
-    //     return target.replace(new RegExp(search, 'g'), replacement);
-    // };
+    String.prototype.replaceAllStr = function(search, replacement) {
+        var target = this;
+        return target.replace(new RegExp(search, 'g'), replacement);
+    };
 }
-store.clear();
+// store.clear();
 // currentWindow.toggleDevTools(); 
 
 ipcRenderer.on("data:folderChosen", function(e, folder){
@@ -88,6 +88,7 @@ function setSelectedImage(path){
 }
 
 function getSelectedPicturePath(){
+    selectedImg = document.getElementById("selectedImg");  
     if (selectedImg.src.substring(0, 7) === "file://"){
         return selectedImg.src.substring(7);
     }
@@ -135,10 +136,12 @@ function storeNewTag(tag){
     renameFile(getSelectedPicturePath()); 
 }
 
+// https://drive.google.com/drive/folders/1q83aP7rZwZaMkpmFUyNtMsYbsRE0nwFQ
 function removeTagFromStore(tag){
     let tagList = store.get(getSelectedPicturePath()); 
     if (tagList && tagList.includes(tag)){
         tagList.splice(tagList.indexOf(tag), 1); 
+        store.delete(getSelectedPicturePath()); 
         store.set(getSelectedPicturePath(), tagList); 
         renameFile(getSelectedPicturePath()); 
     }
@@ -150,9 +153,8 @@ function renameFile(path){
     let dir = store.get(path+"PATH"); 
     let newPath = dir;
     if (picTags){
-        console.log(picTags); 
         for(let tag of picTags){
-            newPath = newPath + "@"+ tag + " "; 
+            newPath = newPath + "@"+ tag + "-"; 
         }
         newPath = newPath + origName; 
         fs.rename(path, newPath, function(err) {
@@ -161,6 +163,10 @@ function renameFile(path){
                 return; 
             }
             selectedImg.src = newPath; 
+            store.set(newPath, picTags); 
+            store.delete(path); 
+            store.set(newPath+"ORIG", origName); 
+            store.set(newPath+"PATH", dir); 
         });
     }
 }

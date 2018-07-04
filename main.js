@@ -4,6 +4,7 @@
 const electron = require("electron")
 const url = require("url")
 const path = require("path")
+const {autoUpdater} = require("electron-updater");
 
 const {
     app,
@@ -18,23 +19,28 @@ const {
 let mainWindow, browseImagesWindow; 
 
 // Events 
+
+/**
+ * UPDATES 
+ */
 app.on("ready", function() {
     mainWindow = createNewWindow({}); 
     loadURL(mainWindow, "index.html");    
     mainWindow.on("closed", function(){
         app.quit(); 
     });
+    autoUpdater.checkForUpdates();
 });
-
-// app.on("web-contents-created", function(){
-//     console.log("HI111"); 
-    
-//     if (prevVisited){
-        
-//         mainWindow.webContents.send("data:prevVisited", prevVisited); 
-//     }
-// });
-
+ 
+  // when the update has been downloaded and is ready to be installed, notify the BrowserWindow
+  autoUpdater.on('update-downloaded', (info) => {
+      win.webContents.send('updateReady')
+  });
+  
+  // when receiving a quitAndInstall signal, quit and install the new version ;)
+  ipcMain.on("quitAndInstall", (event, arg) => {
+      autoUpdater.quitAndInstall();
+  })
 
 ipcMain.on("event:folderChosen", function(e, dir){
     let dirStr = String(dir); 

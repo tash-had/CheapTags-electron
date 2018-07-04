@@ -1,5 +1,5 @@
 const electron = require("electron"); 
-const {ipcRenderer} = electron; 
+// const {ipcRenderer} = electron; 
 const {dialog, BrowserWindow} = electron.remote; 
 const Store = require('electron-store');
 const currentWindow = electron.remote.getCurrentWindow();

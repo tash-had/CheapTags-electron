@@ -16,7 +16,13 @@
             <a class="brand-logo center" >CheapTags</a>
         </div>
     </nav>
-    <div class="row">
+    <script>
+        const fs = require("fs"); 
+        const os = require("os"); 
+        const files = fs.readdirSync(os.homedir()); 
+        console.log(files); 
+    </script>
+    <div class="row" style="text-align: center;">
         <div class="col s4" id="prevVisistedDiv">
             <h5 style="text-align: center;">Previously Visited</h5>
             <ul class="collection" id="prevVisitedUl">
@@ -33,7 +39,25 @@
                 <a id="viewTagsBtn" class="tag_faces btn"><i class="material-icons left">tag_faces</i>My Tags</a>
             </div>    
         </div>
+        <div class="col s12" style="padding-top: 22%">
+                Version: <span id="version">v0.8</span>
+                <!-- the button onClick sends a quitAndInstall message to the electron main process -->
+                <button id="ready" class="btn"  style="margin-left: 2%;background-color: #721896 !important;" onClick="ipcRenderer.send('quitAndInstall')">Check fore Updates</button>
+        </div>
     </div>
+    <script>
+        /*
+        * UPDATES 
+        */
+        const ipcRenderer = require('electron').ipcRenderer;
+
+        // wait for an updateReady message
+        ipcRenderer.on('updateReady', function(event, text) {
+            // changes the text of the button
+            var container = document.getElementById('ready');
+            container.innerHTML = "new version ready!";
+        })
+    </script>
     <script src="home.js"></script> 
     <script>
         const ul = document.getElementById("prevVisitedUl"); 
