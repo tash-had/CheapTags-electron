@@ -1,6 +1,6 @@
 # CheapTags-electron
 I rebuilt [CheapTags](https://github.com/tash-had/cheap-tags) in ElectronJS to learn how to use ElectronJS. 
-I did this over a period of 3 days and my JavaScript was rusty so don't mind the code quality. 
+I did this over a period of 3 days and my JavaScript was rusty so don't mind the code quality. Considering the fact that the Java version took over a week in a group of 4, and the ElectronJS verion took a few days and just 1 person, it's safe to say that the ElectronJS version was **significantly** easier to build. Read more about what I learned in my presentation (linked below)
 
 This was done for a [presentation](https://docs.google.com/presentation/d/1FPGFJfrEYUqUKf050drldtntR315jkpN8mtpPB6IlC8/edit?usp=sharing) I did for Dev Days 2018 (sort of like a team tech conference).
 
