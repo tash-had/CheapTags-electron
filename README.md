@@ -10,7 +10,7 @@ This was done for a [presentation](https://docs.google.com/presentation/d/1FPGFJ
 ![alt text](https://github.com/tash-had/CheapTags-electron/blob/master/screenshots/Screen%20Shot%202018-07-08%20at%2012.39.05%20AM.png "Browse your chosen directory and set tags to your images.")
 
 ### Tags Screen
-** Tags are deleted via double click **
+*Tags are deleted via double click*
 ![alt text](https://github.com/tash-had/CheapTags-electron/blob/master/screenshots/Screen%20Shot%202018-07-08%20at%2012.39.21%20AM.png "Add & remove tags.")
 
 ### Browse Images Screen
